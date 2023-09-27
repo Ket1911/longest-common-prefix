@@ -1,25 +1,27 @@
 package org.example;
+
 import java.util.Arrays;
 import java.util.Comparator;
-public class Solution {
+
+class Solution {
     public String longestCommonPrefix(String[] strs) {
         Arrays.sort(strs, Comparator.comparing(String::length));
         if(strs.length == 0) {
             return "";
         }
-        var firstStrLength = strs[0].length();
+        var firstStrSize = strs[0].length();
         for (int i = 1; i < strs.length; i++) {
-            strs[i] = strs[i].substring(0, firstStrLength);
+            strs[i] = strs[i].substring(0, firstStrSize);
         }
         while (!strs[0].isEmpty()) {
             if (Arrays.stream(strs).skip(1).allMatch(s -> strs[0].equals(s))) {
                 return strs[0];
             }
-            firstStrLength--;
+            firstStrSize--;
             for (int i = 0; i < strs.length; i++) {
-                strs[i] = strs[i].substring(0, firstStrLength);
+                strs[i] = strs[i].substring(0, firstStrSize);
             }
         }
         return "";
     }
-} 
+}
