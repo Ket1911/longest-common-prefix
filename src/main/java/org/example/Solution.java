@@ -9,20 +9,17 @@ class Solution {
         if(strs.length == 0) {
             return "";
         }
-
-        var length = strs[0].length();
-
-        for (int j = 1; j < strs.length; j++) {
-            strs[j] = strs[j].substring(0, length);
+        var firstStrLength = strs[0].length();
+        for (int i = 1; i < strs.length; i++) {
+            strs[i] = strs[i].substring(0, firstStrLength);
         }
-
         while (!strs[0].isEmpty()) {
             if (Arrays.stream(strs).skip(1).allMatch(s -> strs[0].equals(s))) {
                 return strs[0];
             }
-            length--;
-            for (int t = 0; t < strs.length; t++) {
-                strs[t] = strs[t].substring(0, length);
+            firstStrLength--;
+            for (int i = 0; i < strs.length; i++) {
+                strs[i] = strs[i].substring(0, firstStrLength);
             }
         }
         return "";
