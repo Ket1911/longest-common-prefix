@@ -5,6 +5,12 @@ import java.util.Comparator;
 
 class Solution {
     public String longestCommonPrefix(String[] strs) {
+        System.out.println();
+System.out.println();
+System.out.println();
+System.out.println();
+System.out.println();
+System.out.println();
         Arrays.sort(strs, Comparator.comparing(String::length));
         if(strs.length == 0) {
             return "";
