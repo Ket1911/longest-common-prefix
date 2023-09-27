@@ -1,27 +1,24 @@
-package org.example;
-
 import java.util.Arrays;
-
+import java.util.Comparator;
 public class Solution {
     public String longestCommonPrefix(String[] strs) {
-        if (strs == null || strs.length == 0) {
+        Arrays.sort(strs, Comparator.comparing(String::length));
+        if(strs.length == 0) {
             return "";
         }
-
-        Arrays.sort(strs);
-        String firstStr = strs[0];
-        String lastStr = strs[strs.length - 1];
-        int minLength = Math.min(firstStr.length(), lastStr.length());
-
-        StringBuilder commonPrefix = new StringBuilder();
-        for (int i = 0; i < minLength; i++) {
-            if (firstStr.charAt(i) == lastStr.charAt(i)) {
-                commonPrefix.append(firstStr.charAt(i));
-            } else {
-                break;
+        var firstStrLength = strs[0].length();
+        for (int i = 1; i < strs.length; i++) {
+            strs[i] = strs[i].substring(0, firstStrLength);
+        }
+        while (!strs[0].isEmpty()) {
+            if (Arrays.stream(strs).skip(1).allMatch(s -> strs[0].equals(s))) {
+                return strs[0];
+            }
+            firstStrLength--;
+            for (int i = 0; i < strs.length; i++) {
+                strs[i] = strs[i].substring(0, firstStrLength);
             }
         }
-
-        return commonPrefix.toString();
+        return "";
     }
-}
+} 
